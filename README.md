@@ -26,3 +26,10 @@ String(repeating: "1", count: 3) // "111"
 ``` Swift
 Int(sqrt(16)) // 4
 ```
+
+- Backjoon Input
+``` Swift
+// Line 별로 readLine()! 호출
+let input0 = readLine()!
+let input1 = readLine()!
+```
