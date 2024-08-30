@@ -50,10 +50,8 @@ print(String(repeating: "long ", count: Int(readLine()!)! / 4) + "int")
 /*
  빠른 A+B
  https://www.acmicpc.net/problem/15552
+ 풀이 : https://github.com/moonjs0113/CodingTest/blob/main/Backjoob/StepByStep/Level3_Fast_A%2BB.swift
  */
-// TODO: - 참고하고 이해할 것
-// https://velog.io/@comdongsam/Swift-15552-%EB%B9%A0%EB%A5%B8-A-B
-// https://gist.github.com/JCSooHwanCho/30be4b669321e7a135b84a1e9b075f88
 
 /*
  A+B - 7
