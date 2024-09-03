@@ -1,5 +1,7 @@
 # CodingTest
 
+- 10 ^ 8 (100,000,000) = 1s
+
 - String <-> Int in Binary Format
 ``` Swift
 String(2, radix:2) // "10"
@@ -20,6 +22,17 @@ String(repeating: "1", count: 3) // "111"
 - String Slide
 ``` Swift
 "let separatedString = string".components(separatedBy: " ") // ["let", "separatedString", "=", "string"]
+```
+
+- SubString
+``` Swift
+String(Array("String")[i...j]) // 느리다.
+```
+
+- Set vs Array Contains Function Time Complexity
+``` Swfit
+Set.contains(_:) // O(1) Because Set adopted Hashable protocol
+Array.contains(_:) // O(n)
 ```
 
 - Square Root
