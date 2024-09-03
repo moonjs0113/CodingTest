@@ -30,7 +30,20 @@ print(result)
  분해합
  https://www.acmicpc.net/problem/2231
  */
-
+let numString = readLine()!
+let count = numString.count
+let num = Int(numString)!
+if num == 1 {
+    print("0")
+} else {
+    for i in (max(1, num - count * 9)..<num) {
+        if i + String(i).reduce(0) { $0 + Int("\($1)")! } == num {
+            print(i)
+            break
+        }
+        if i == num - 1 { print("0") }
+    }
+}
 
 /*
  수학은 비대면강의입니다
