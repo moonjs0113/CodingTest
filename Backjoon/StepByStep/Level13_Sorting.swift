@@ -111,3 +111,18 @@ Set((0..<Int(readLine()!)!).map { _ in readLine()! }).sorted{ $0 < $1 }.sorted {
 }
 .sorted { $0.1 < $1.1 }
 .forEach { print("\($0.1) \($0.2)") }
+
+/*
+ 좌표 압축
+ https://www.acmicpc.net/problem/18870
+ */
+readLine()
+let array = readLine()!.split(separator: " ").map { Int($0)! }
+let set = Set(array).sorted()
+var dic: [Int:Int] = [:]
+(0..<set.count).forEach {
+    dic[set[$0]] = $0
+}
+array.forEach {
+    print("\(dic[$0]!)", terminator: " ")
+}
