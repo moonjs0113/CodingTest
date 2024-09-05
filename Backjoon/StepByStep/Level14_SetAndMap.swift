@@ -57,3 +57,56 @@ let pocketmonsList = (0..<nums[0]).map { i -> String in
         print(pocketmonsDict[i]!)
     }
 }
+
+/*
+ 숫자 카드 2
+ https://www.acmicpc.net/problem/10816
+ */
+var cards: [Int: Int] = [:]
+readLine()
+readLine()!.split(separator: " ").forEach {
+    cards[Int($0)!] = (cards[Int($0)!] ?? 0) + 1
+}
+readLine()
+print(readLine()!.split(separator: " ").map { "\(cards[Int($0)!] ?? 0)" }.joined(separator: " "))
+
+/*
+ 듣보잡
+ https://www.acmicpc.net/problem/1764
+ */
+let nm = readLine()!.split(separator: " ").map { Int($0)! }
+var people: Set<String> = []
+(0..<nm[0]).forEach { _ in
+    people.insert(readLine()!)
+}
+people = Set((0..<nm[1]).compactMap { _ -> String? in
+    let name = readLine()!
+    return people.contains(name) ? name : nil
+})
+print(people.count)
+people.sorted(by: <).forEach{ print($0) }
+
+/*
+ 대칭 차집합
+ https://www.acmicpc.net/problem/1269
+ */
+readLine()!
+let set0 = Set(readLine()!.split(separator: " ").map { Int($0)! })
+let set1 = Set(readLine()!.split(separator: " ").map { Int($0)! })
+print(set0.subtracting(set1).union(set1.subtracting(set0)).count)
+
+/*
+ 서로 다른 부분 문자열의 개수
+ https://www.acmicpc.net/problem/11478
+ */
+let word = Array(readLine()!)
+var set: Set<String> = Set(word.map(String.init))
+(0..<word.count).forEach { i in
+    var subWord = ""
+    (i..<word.count).forEach { j in
+        subWord += "\(word[j])"
+        set.insert(subWord)
+    }
+}
+print(set.count)
+
