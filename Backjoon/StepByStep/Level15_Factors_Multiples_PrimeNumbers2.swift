@@ -1,6 +1,5 @@
 import Foundation
 
-print(Int(sqrt(Double(Int("24")!))))
 /*
  백준 단계 별로 풀어보기
  15단계 약수, 배수와 소수 2 https://www.acmicpc.net/step/18
