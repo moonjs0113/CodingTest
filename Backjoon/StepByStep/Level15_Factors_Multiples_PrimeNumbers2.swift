@@ -72,3 +72,112 @@ print((0..<Int(readLine()!)!).compactMap { _ in
 }.reduce(0) {
     return $0 + ($1 / (ogcd ?? 1)) - 1
 })
+
+/*
+ 다음 소수
+ https://www.acmicpc.net/problem/4134
+ */
+(0..<Int(readLine()!)!).forEach { _ in
+    var num = Int(readLine()!)!
+    if num < 9 {
+        if num < 3 { print(2) }
+        else if num == 3 { print(3) }
+        else if num < 6 { print(5) }
+        else if num < 8 { print(7) }
+        else { print(11) }
+        return
+    }
+    Loop: while true {
+        if num % 2 == 0 || num % 3 == 0 || num % 5 == 0 {
+            num += 1
+            continue
+        }
+        for i in stride(from: 3, to: Int(sqrt(Double(num)))+1, by: 2) {
+            if num % i == 0 {
+                num += 1
+                continue Loop
+            }
+        }
+        break Loop
+    }
+    print(num)
+}
+
+/*
+ 소수 구하기
+ https://www.acmicpc.net/problem/1929
+ */
+let nums = readLine()!.split(separator: " ").map { Int($0)! }
+(nums[0]...nums[1]).forEach {
+    if $0 < 9 {
+        if [2,3,5,7].contains($0) {
+            print($0)
+        }
+        return
+    }
+    if $0 % 2 == 0 || $0 % 3 == 0 || $0 % 5 == 0 {
+        return
+    }
+    for i in stride(from: 3, to: Int(sqrt(Double($0)))+1, by: 2) {
+        if $0 % i == 0 {
+            return
+        }
+    }
+    print($0)
+}
+
+/*
+ 베르트랑
+ https://www.acmicpc.net/problem/4948
+ */
+while true {
+    let num = Int(readLine()!)!
+    if num == 0 { break }
+    print(((num+1)...(num*2)).reduce(0) {
+        if $1 < 9 {
+            if [2,3,5,7].contains($1) { return $0 + 1 }
+            return $0
+        }
+        if $1 % 2 == 0 || $1 % 3 == 0 || $1 % 5 == 0 { return $0 }
+        for i in stride(from: 3, to: Int(sqrt(Double($1)))+1, by: 2) {
+            if $1 % i == 0 { return $0 }
+        }
+        return $0 + 1
+    })
+}
+
+/*
+ 골드바흐 파티션
+ https://www.acmicpc.net/problem/17103
+ */
+let MAX_NUM = 1000000
+var isPrimeNumber = Array(repeating: true, count: MAX_NUM + 1)
+isPrimeNumber[0] = false
+isPrimeNumber[1] = false
+
+(2..<Int(sqrt(Double(MAX_NUM)) + 1)).forEach { i in
+    if isPrimeNumber[i] {
+        var j = 2
+        while i * j <= MAX_NUM {
+            isPrimeNumber[i * j] = false
+            j += 1
+        }
+    }
+}
+(0..<Int(readLine()!)!).forEach { _ in
+    let target = Int(readLine()!)!
+    var count = isPrimeNumber[target - 2] ? 1 : 0
+    
+    for num in stride(from: 3, to: (target/2)+1, by: 2) {
+        if isPrimeNumber[num] {
+            count += (isPrimeNumber[target - num] ? 1 : 0)
+        }
+    }
+    print(count)
+}
+
+/*
+ 창문 닫기
+ https://www.acmicpc.net/problem/13909
+ */
+print(Int(sqrt(Double(Int(readLine()!)!))))
