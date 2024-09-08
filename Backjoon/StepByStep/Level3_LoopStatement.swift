@@ -50,8 +50,12 @@ print(String(repeating: "long ", count: Int(readLine()!)! / 4) + "int")
 /*
  빠른 A+B
  https://www.acmicpc.net/problem/15552
- 풀이 : https://github.com/moonjs0113/CodingTest/blob/main/Backjoob/StepByStep/Level3_Fast_A%2BB.swift
+ FileIO: https://github.com/moonjs0113/CodingTest/blob/main/Backjoon/StepByStep/FileIO.swift
  */
+let fileIO = FileIO()
+(0..<fileIO.readInt()).forEach { _ in
+    print(fileIO.readInt() + fileIO.readInt())
+}
 
 /*
  A+B - 7
