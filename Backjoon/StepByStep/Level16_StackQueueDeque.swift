@@ -204,3 +204,25 @@ s.removeLast()
 s.removeFirst()
 print("<\(s)>")
 
+/*
+ 덱 2
+ https://www.acmicpc.net/problem/28279
+ Deque : https://github.com/moonjs0113/CodingTest/blob/main/Backjoon/StepByStep/Deque.swift
+ */
+let deque = Deque()
+(0..<Int(readLine()!)!).forEach { _ in
+    let command = readLine()!
+    if command.count == 1 {
+        let c = Int(command)!
+        switch c {
+        case 3...4: print(deque.pop(isFront: (c % 2 == 1)) ?? -1)
+        case 5: print(deque.count)
+        case 6: print((deque.count == 0) ? "1" : "0")
+        case 7...8: print(deque.getValue(isFront: (c % 2 == 1)) ?? -1)
+        default: break
+        }
+    } else {
+        let input = command.split(separator: " ").map { Int($0)! }
+        deque.push(isFront: input[0] == 1, value: input[1])
+    }
+}
