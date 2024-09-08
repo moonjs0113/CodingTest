@@ -1,6 +1,7 @@
 /*
- 빠른 A+B
- https://www.acmicpc.net/problem/15552
+ 백준
+ 빠른 입출력 클래스
+
  Reference
  - https://gist.github.com/JCSooHwanCho/30be4b669321e7a135b84a1e9b075f88
 
@@ -65,7 +66,3 @@ final class FileIO {
     }
 }
 
-let fileIO = FileIO()
-(0..<fileIO.readInt()).forEach { _ in
-    print(fileIO.readInt() + fileIO.readInt())
-}
