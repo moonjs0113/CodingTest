@@ -182,3 +182,25 @@ else {
     }
     print((num - i / 2) * 2)
 }
+
+/*
+ 요세푸스 문제 0
+ https://www.acmicpc.net/problem/11866
+ */
+let nums = readLine()!.split(separator: " ").map { Int($0)! }
+var array = Array(1...nums[0])
+var result: [Int] = []
+var index = 0
+while array.count > 1 {
+    index += (nums[1] - 1)
+    while index >= array.count {
+        index -= array.count
+    }
+    result.append(array.remove(at: index))
+}
+result.append(array.popLast()!)
+var s = "\(result)"
+s.removeLast()
+s.removeFirst()
+print("<\(s)>")
+
