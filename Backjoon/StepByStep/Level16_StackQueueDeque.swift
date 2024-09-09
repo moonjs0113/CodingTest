@@ -226,3 +226,32 @@ let deque = Deque()
         deque.push(isFront: input[0] == 1, value: input[1])
     }
 }
+
+/*
+ 풍선 터뜨리기
+ https://www.acmicpc.net/problem/2346
+ DoubleLinkedList : https://github.com/moonjs0113/CodingTest/blob/main/Backjoon/StepByStep/DoubleLinkedList.swift
+ */
+readLine()
+let linkedList = DoubleLinkedList()
+readLine()!.split(separator: " ").forEach {
+    linkedList.push(isFront: false, value: Int($0)!)
+}
+var node = linkedList.front?.back
+var result = ""
+while linkedList.count > 0 {
+    let step = node?.val ?? 0
+    let isBack = (step > 0)
+    result += "\(node?.index ?? 0) "
+    var tempNode = node
+    (0..<abs(step)).forEach { i in
+        tempNode = isBack ? tempNode?.back : tempNode?.front
+        if tempNode?.back == nil || tempNode?.front == nil {
+            tempNode = isBack ? linkedList.front?.back : linkedList.back?.front
+        }
+        if i == 0 { linkedList.popNode(node) }
+    }
+    node = tempNode
+}
+result.popLast()
+print(result)
