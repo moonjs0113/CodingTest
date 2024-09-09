@@ -32,12 +32,20 @@ extension UInt8 {
     static let nineValue: Self = 57
 }
 
-final class FileIO {
+final public class FileIO {
     private let buffer:[UInt8]
     private var index: Int = 0
-    init(fileHandle: FileHandle = FileHandle.standardInput) {
+    public init(fileHandle: FileHandle = FileHandle.standardInput) {
         buffer = Array(try! fileHandle.readToEnd()!) + [UInt8(0)]
         // + [UInt8(0)]: 인덱스 범위 넘어가는 것 방지
+    }
+
+    public init(string: String) {
+        guard let data = string.data(using: .utf8) else {
+            buffer = [UInt8(0)]
+            return
+        }
+        buffer = Array(data) + [UInt8(0)]
     }
     
     @inline(__always) private func read() -> UInt8 {
