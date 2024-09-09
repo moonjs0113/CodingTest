@@ -112,6 +112,7 @@ if i != -1 { print("Nice") }
 /*
  큐 2
  https://www.acmicpc.net/problem/18258
+ FileIO : https://github.com/moonjs0113/CodingTest/blob/main/Backjoon/StepByStep/FileIO.swift
  */
 
 // General Code
@@ -252,6 +253,37 @@ while linkedList.count > 0 {
         if i == 0 { linkedList.popNode(node) }
     }
     node = tempNode
+}
+result.popLast()
+print(result)
+
+/*
+ queuestack
+ https://www.acmicpc.net/problem/24511
+ FileIO : https://github.com/moonjs0113/CodingTest/blob/main/Backjoon/StepByStep/FileIO.swift
+ */
+let fileIO = FileIO()
+var qsCount = fileIO.readInt()
+let qs: [Bool] = (0..<qsCount).map { _ -> Bool in fileIO.readInt() == 0 }
+var stack: [Int] = []
+for isQueue in qs {
+    let num = fileIO.readInt()
+    if isQueue {
+        stack.append(num)
+    }
+}
+qsCount = stack.count
+var result = ""
+let inputCount = fileIO.readInt()
+if stack.count > 0 {
+    (0..<min(inputCount, stack.count)).forEach { _ in
+        result += "\(stack.popLast() ?? 0) "
+    }
+}
+if qsCount < inputCount {
+    (0..<inputCount - qsCount).forEach { _ in
+        result += "\(fileIO.readInt()) "
+    }
 }
 result.popLast()
 print(result)
