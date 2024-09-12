@@ -44,3 +44,25 @@ var set: Set<String> = ["ChongChong"]
     }
 }
 print(set.count)
+
+/*
+ 통계학
+ https://www.acmicpc.net/problem/2108
+ */
+let n = Int(readLine()!)!
+var dic: [Int: Int] = [:]
+let nums = (0..<n).map { _ -> Int in
+    let num = Int(readLine()!)!
+    dic[num] = (dic[num] == nil) ? 1 : dic[num]! + 1
+    return num
+}
+print(Int(round(Double(nums.reduce(0, +)) / Double(nums.count))))
+print(nums.sorted()[n/2])
+if n == 1 {
+    print(nums[0])
+} else {
+    let item = dic.max { $0.value < $1.value }
+    dic = dic.filter { $0.value == item!.value }
+    print(dic.count == 1 ? dic.first!.key : dic.sorted { $0.key < $1.key }[1].key)
+}
+print(nums.max()! - nums.min()!)
