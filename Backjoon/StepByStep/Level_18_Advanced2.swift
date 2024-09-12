@@ -66,3 +66,24 @@ if n == 1 {
     print(dic.count == 1 ? dic.first!.key : dic.sorted { $0.key < $1.key }[1].key)
 }
 print(nums.max()! - nums.min()!)
+
+/*
+ 영단어 암기는 괴로워
+ https://www.acmicpc.net/problem/20920
+ */
+let n = readLine()!.split(separator: " ").map{ Int($0)! }
+var dic: [String: Int] = [:]
+(0..<n[0]).forEach { _ in
+    let word = readLine()!
+    if word.count < n[1] { return }
+    dic[word] = (dic[word] == nil) ? 1 : dic[word]! + 1
+}
+dic.sorted {
+    if $0.value == $1.value {
+        if $0.key.count == $1.key.count { return $0.key < $1.key }
+        return $0.key.count > $1.key.count
+    }
+    return $0.value > $1.value
+}.forEach {
+    print($0.key)
+}
