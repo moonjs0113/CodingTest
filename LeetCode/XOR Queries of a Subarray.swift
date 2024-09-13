@@ -1,6 +1,6 @@
 /*
   XOR Queries of a Subarray
-  URL: https://leetcode.com/problems/count-the-number-of-consistent-strings
+  URL: https://leetcode.com/problems/xor-queries-of-a-subarray
   Difficulty: Medium
   Topic: Array, Bit Manipulation, Prefix Sum
 */
