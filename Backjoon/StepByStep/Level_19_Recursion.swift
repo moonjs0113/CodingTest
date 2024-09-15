@@ -42,6 +42,75 @@ func recursion(_ s: [Character], _ l: Int, _ r: Int) -> Int {
 func isPalindrome(_ s: [Character]) -> Int {
     return recursion(s, 0, s.count - 1)
 }
+
+/*
+ 알고리즘 수업 - 병합 정렬 1
+ https://www.acmicpc.net/problem/24060
+ */
+func merge_sort(_ array: inout [Int], p: Int, r: Int) {
+    if num != -1 { return }
+    if p < r {
+        let q = (p + r) / 2
+        merge_sort(&array, p: p, r: q)
+        merge_sort(&array, p: q + 1, r: r)
+        merge(&array, p: p, q: q, r: r)
+    }
+}
+func merge(_ array: inout [Int], p: Int, q: Int, r: Int) {
+    if num != -1 { return }
+    var i = p, j = q + 1, t = 0
+    while i <= q && j <= r {
+        if array[i] <= array[j] {
+            temp[t] = array[i]
+            t += 1
+            i += 1
+        } else {
+            temp[t] = array[j]
+            t += 1
+            j += 1
+        }
+    }
+    while i <= q {
+        temp[t] = array[i]
+        t += 1
+        i += 1
+    }
+    while j <= r {
+        temp[t] = array[j]
+        t += 1
+        j += 1
+    }
+    i = p
+    t = 0
+    while i <= r {
+        target += 1
+        if target == k {
+            num = temp[t]
+            break
+        }
+        array[i] = temp[t]
+        t += 1
+        i += 1
+    }
+}
+func recursion(n: Int) -> Int {
+    if n == 1 { return 0 }
+    if n == 2 { return n }
+    return n + recursion(n: n / 2) + recursion(n: (n / 2) + (n % 2))
+}
+let nums = readLine()!.split(separator: " ").map { Int($0)! }
+let len = nums.first!
+let k = nums.last!
+let max = recursion(n: len)
+var target = 0
+var num = -1
+var array = readLine()!.split(separator: " ").map { Int($0)! }
+var temp = Array(repeating: 0, count: len)
+if max >= k {
+    merge_sort(&array, p: 0, r: array.count-1)
+    print(num)
+} else { print(-1) }
+
 (0..<Int(readLine()!)!).forEach { _ in
     count = 0
     print("\(isPalindrome(Array(readLine()!))) \(count)")
