@@ -115,3 +115,29 @@ if max >= k {
     count = 0
     print("\(isPalindrome(Array(readLine()!))) \(count)")
 }
+
+/*
+ 칸토어 집합
+ https://www.acmicpc.net/problem/4779
+ */
+// HOF Version
+while true {
+    guard let input = readLine() else { break }
+    let num = Int(input)!
+    if num == 0 { print("-") }
+    else {
+        print((1...num).reduce("-") { result, num -> String in
+            return result + String(repeating: " ", count: Int(pow(3.0, Float(num-1)))) + result
+        })
+    }
+}
+
+// Recursive Function
+func hyphen(n: Int) -> String {
+    if n == 0 { return "-" }
+    return hyphen(n: n - 1) + String(repeating: " ", count: Int(pow(3.0, Float(n-1)))) + hyphen(n: n - 1)
+}
+while true {
+    guard let input = readLine() else { break }
+    print(hyphen(n: Int(input)!))
+}
