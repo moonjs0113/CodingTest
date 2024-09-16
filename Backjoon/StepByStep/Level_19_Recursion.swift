@@ -141,3 +141,25 @@ while true {
     guard let input = readLine() else { break }
     print(hyphen(n: Int(input)!))
 }
+
+/*
+ 별 찍기 - 10
+ https://www.acmicpc.net/problem/2447
+ */
+let input = Int(readLine()!)!
+func star(n: Int) -> [String] {
+    if n == 1 { return ["*"] }
+    let subString = star(n: n / 3)
+    var result: [String] = []
+    (0..<3).forEach { i in
+        subString.forEach {
+            let sub = i % 3 != 1
+            ? String(repeating: $0, count: 3)
+            : ($0 + String(repeating: " ", count: n / 3) + $0)
+            result.append(sub)
+        }
+    }
+    return result
+}
+star(n: input).forEach { print($0) }
+
