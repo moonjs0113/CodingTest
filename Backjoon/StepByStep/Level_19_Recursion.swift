@@ -163,3 +163,23 @@ func star(n: Int) -> [String] {
 }
 star(n: input).forEach { print($0) }
 
+/*
+ 하노이 탑 이동 순서
+ https://www.acmicpc.net/problem/11729
+ */
+let num = Int(readLine()!)!
+var count = 0
+var result = ""
+func hanoi(_ n: Int, from a: Int, to b: Int, by c: Int) {
+    count += 1
+    if n == 1 {
+        result += "\(a) \(b)\n"
+    } else {
+        hanoi(n-1, from: a, to: c, by: b)
+        result += "\(a) \(b)\n"
+        hanoi(n-1, from: c, to: b, by: a)
+    }
+}
+hanoi(num, from: 1, to: 3, by: 2)
+print("\(count)\n" + result)
+
