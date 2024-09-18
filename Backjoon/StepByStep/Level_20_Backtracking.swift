@@ -26,3 +26,23 @@ func backtracking(a: [Int], set: Set<Int>) {
     }
 }
 backtracking(a: [], set: [])
+
+/*
+ N과 M (2)
+ https://www.acmicpc.net/problem/15650
+ */
+let nums = readLine()!.split(separator: " ").map { Int($0)! }
+let array = Array(1...nums[0])
+func backtracking(a: [Int], i: Int = 0) {
+    if a.count == nums[1] {
+        print(a.reduce("") { $0 + "\($1) " })
+        return
+    }
+    for index in (i..<nums[0]) {
+        if index >= nums[0] { break }
+        var next = a
+        next.append(array[index])
+        backtracking(a: next, i: index + 1)
+    }
+}
+backtracking(a: [])
