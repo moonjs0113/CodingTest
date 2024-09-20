@@ -46,3 +46,15 @@ func backtracking(a: [Int], i: Int = 0) {
     }
 }
 backtracking(a: [])
+
+/*
+ N과 M (3)
+ https://www.acmicpc.net/problem/15651
+ */
+let nums = readLine()!.split(separator: " ").map { Int($0)! }
+func backtracking(a: [Int]) {
+    if a.count == nums[1] { print(a.reduce("") { $0 + "\($1) " })
+    } else { (1...nums[0]).forEach { backtracking(a: a + [$0]) } }
+}
+backtracking(a: [])
+
