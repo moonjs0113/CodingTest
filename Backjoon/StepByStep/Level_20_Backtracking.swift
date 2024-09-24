@@ -72,3 +72,31 @@ func backtracking(a: [Int], i: Int) {
     }
 }
 backtracking(a: [], i: 0)
+
+/*
+ N-Queen
+ https://www.acmicpc.net/problem/9663
+ */
+let num = Int(readLine()!)!
+var coordinate = Array(repeating: 0, count: num)
+var count = 0
+var subCount = 0
+func nQueen(_ x: Int, _ f: Int) {
+    if x == num {
+        if f == num / 2 { subCount += 1 }
+        count += 1
+        return
+    }
+    let range = (x == 0) ? ((num + 1) / 2) : num
+Loop: for i in (0..<range) {
+    coordinate[x] = i
+    for j in (0..<x) {
+        if coordinate[x] == coordinate[j] || abs(coordinate[x] - coordinate[j]) == abs(x - j) {
+            continue Loop
+        }
+    }
+    nQueen(x+1, (x == 0 && f == -1) ? i : f)
+}
+}
+nQueen(0, -1)
+print(count * 2 - subCount)
