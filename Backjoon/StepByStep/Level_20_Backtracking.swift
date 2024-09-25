@@ -100,3 +100,52 @@ Loop: for i in (0..<range) {
 }
 nQueen(0, -1)
 print(count * 2 - subCount)
+
+/*
+ 스도쿠
+ https://www.acmicpc.net/problem/2580
+ */
+var sudoku: [[Int]] = []
+var zero: [(i: Int, j: Int)] = []
+(0...8).forEach { j in
+    let row = readLine()!.split(separator: " ").map { Int($0)! }
+    sudoku.append(row)
+    (0...8).forEach { i in
+        if row[i] == 0 { zero.append((i, j)) }
+    }
+}
+func checkCol(i: Int, num: Int) -> Bool {
+    for j in 0..<9 {
+        if sudoku[j][i] == num { return true }
+    }
+    return false
+}
+func checkBlock(_ i: Int, _ j: Int, n: Int) -> Bool {
+    let iStep = (i / 3) * 3
+    let jStep = (j / 3) * 3
+    for r in 0..<3 {
+        for c in 0..<3 {
+            if sudoku[jStep + r][iStep + c] == n  { return true }
+        }
+    }
+    return false
+}
+
+func placeNumber(_ z: Int) {
+    if z == zero.count {
+        sudoku.forEach { print($0.reduce("") { $0 + "\($1) " }) }
+        exit(0)
+    }
+    let i = zero[z].0
+    let j = zero[z].1
+    
+    for n in (1...9) {
+        if sudoku[j].contains(n) || checkCol(i: i, num: n) || checkBlock(i, j, n: n) {
+            continue
+        }
+        sudoku[j][i] = n
+        placeNumber(z + 1)
+        sudoku[j][i] = 0
+    }
+}
+placeNumber(0)
