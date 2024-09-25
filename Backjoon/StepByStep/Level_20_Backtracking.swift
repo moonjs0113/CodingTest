@@ -149,3 +149,44 @@ func placeNumber(_ z: Int) {
     }
 }
 placeNumber(0)
+
+/*
+ 연산자 끼워넣기
+ https://www.acmicpc.net/problem/14888
+ */
+let nCount = Int(readLine()!)!
+let nums = readLine()!.split(separator: " ").map { Int($0)! }
+var operators = readLine()!.split(separator: " ").map { Int($0)! }
+
+var resultMax = Int.min
+var resultMin = Int.max
+
+func backtracking(result: Int, index: Int) {
+    if index == nCount {
+        resultMax = max(result, resultMax)
+        resultMin = min(result, resultMin)
+        return
+    }
+    
+    for i in 0..<operators.count {
+        if operators[i] == 0 { continue }
+        var result = result
+        
+        switch i {
+        case 0:
+            result += nums[index]
+        case 1:
+            result -= nums[index]
+        case 2:
+            result *= nums[index]
+        default:
+            result /= nums[index]
+        }
+        
+        operators[i] -= 1
+        backtracking(result: result, index: index + 1)
+        operators[i] += 1
+    }
+}
+backtracking(result: nums.first!, index: 1)
+print("\(resultMax)\n\(resultMin)")
