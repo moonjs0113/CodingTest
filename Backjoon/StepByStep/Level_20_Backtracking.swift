@@ -190,3 +190,53 @@ func backtracking(result: Int, index: Int) {
 }
 backtracking(result: nums.first!, index: 1)
 print("\(resultMax)\n\(resultMin)")
+
+/*
+ 스타트와 링크
+ https://www.acmicpc.net/problem/14889
+ */
+let nCount = Int(readLine()!)!
+let matrix = (0..<nCount).map { _ -> [Int] in
+    readLine()!.split(separator: " ").map { Int($0)! }
+}
+var result = Int.max
+var teamStart = Array(repeating: false, count: nCount)
+func maxCount(r: Int) -> (Int, Int) {
+    var max = 1
+    var n = r * 2
+    (0..<r).forEach { i in
+        max *= n
+        max /= (i + 1)
+        n -= 1
+    }
+    return (0, max)
+}
+var stopCount: (Int, Int) = maxCount(r: nCount/2)
+
+func backtracking(count: Int = 0, i: Int = 0) {
+    if count == nCount/2 {
+        var startPoint = 0
+        var linkPoint = 0
+
+        for i in 0..<nCount {
+            for j in 0..<nCount {
+                if teamStart[i] && teamStart[j] { startPoint += matrix[i][j] }
+                if !(teamStart[i] || teamStart[j]) { linkPoint += matrix[i][j] }
+            }
+        }
+        result = min(result, abs(startPoint - linkPoint))
+        stopCount.0 += 1
+        return
+    }
+    
+    for index in i..<nCount {
+        if stopCount.0 == stopCount.1 / 2 { break }
+        if !teamStart[index] {
+            teamStart[index] = true
+            backtracking(count: count + 1, i: index)
+            teamStart[index] = false
+        }
+    }
+}
+backtracking()
+print(result)
