@@ -55,3 +55,22 @@ while true {
     let value = recursion(nums[0], nums[1], nums[2])
     print("w(\(nums[0]), \(nums[1]), \(nums[2])) = \(value)")
 }
+
+/*
+ 01타일
+ https://www.acmicpc.net/problem/1904
+ */
+func dp(n: Int) -> Int {
+    if n < 3 { return n }
+    var n0 = 1
+    var n1 = 2
+    var result = 0
+    for i in 0..<n-2 {
+        result = (n0 + n1) % 15746
+        n0 = n1
+        n1 = result
+    }
+    return result
+}
+print(dp(n: Int(readLine()!)!))
+
