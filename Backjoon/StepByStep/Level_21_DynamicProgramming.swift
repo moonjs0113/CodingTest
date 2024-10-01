@@ -74,3 +74,20 @@ func dp(n: Int) -> Int {
 }
 print(dp(n: Int(readLine()!)!))
 
+/*
+ 파도반 수열
+ https://www.acmicpc.net/problem/9461
+ */
+var f = [1,1,1,2,2]
+func dp(n: Int) -> Int {
+    if n < 6 { return f[n-1] }
+    for i in (f.count-5)..<n-5 {
+        f.append(f.last! + f[i])
+    }
+    return f.last!
+}
+(0..<Int(readLine()!)!).forEach { _ in
+    let num = Int(readLine()!)!
+    print(f.count >= num ? f[num-1]: dp(n: num))
+}
+
