@@ -91,3 +91,17 @@ func dp(n: Int) -> Int {
     print(f.count >= num ? f[num-1]: dp(n: num))
 }
 
+/*
+ 연속합
+ https://www.acmicpc.net/problem/1912
+ */
+let count = Int(readLine()!)!
+let nums = readLine()!.split(separator: " ").map{ Int($0)! }
+var temp = nums.first!
+var result = nums.first!
+for i in 1..<count {
+    temp = max(nums[i], temp + nums[i])
+    result = max(result, temp)
+}
+print(result)
+
