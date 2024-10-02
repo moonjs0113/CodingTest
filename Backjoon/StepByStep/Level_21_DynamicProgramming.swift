@@ -105,3 +105,23 @@ for i in 1..<count {
 }
 print(result)
 
+/*
+ RGB거리
+ https://www.acmicpc.net/problem/1149
+ */
+let rgb = (0..<Int(readLine()!)!).map { _ in
+    readLine()!.split(separator: " ").map{ Int($0)! }
+}
+var cost = [0,0,0]
+for rbgCost in rgb.reversed() {
+    (0..<3).forEach { i in
+        cost[i] += rbgCost[i]
+    }
+    let sortedCost = cost.sorted()
+    let min = sortedCost.first!
+    let minIndex = cost.firstIndex(of: min)!
+    (0..<3).forEach { i in
+        cost[i] = (i != minIndex ? min : sortedCost[1])
+    }
+}
+print(cost.min()!)
