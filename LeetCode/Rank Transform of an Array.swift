@@ -1,7 +1,7 @@
 /*
   Rank Transform of an Array
   URL: https://leetcode.com/problems/rank-transform-of-an-array
-  Difficulty: Medium
+  Difficulty: Easy
   Topic : Array, Hash Table, Sorting
 */
 
