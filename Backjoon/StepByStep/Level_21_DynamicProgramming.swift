@@ -125,3 +125,17 @@ for rbgCost in rgb.reversed() {
     }
 }
 print(cost.min()!)
+
+/*
+ 정수 삼각형
+ https://www.acmicpc.net/problem/1932
+ */
+let floors = (0..<Int(readLine()!)!).map { _ in
+    readLine()!.split(separator: " ").map{ Int($0)! }
+}
+print(floors.reversed().reduce([Int]()) { sum, floor in
+    if sum.isEmpty { return floor }
+    return floor.enumerated().map { item in
+        item.element + max(sum[item.offset] , sum[item.offset + 1])
+    }
+}.first!)
