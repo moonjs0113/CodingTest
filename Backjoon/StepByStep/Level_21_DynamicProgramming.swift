@@ -139,3 +139,21 @@ print(floors.reversed().reduce([Int]()) { sum, floor in
         item.element + max(sum[item.offset] , sum[item.offset + 1])
     }
 }.first!)
+
+/*
+ 계단 오르기
+ https://www.acmicpc.net/problem/2579
+ */
+let point = (0..<Int(readLine()!)!).map { _ in Int(readLine()!)! }
+var cache: [Int: Int] = [:]
+func stair(_ i: Int) -> Int {
+    if i == 0 { return point[0] }
+    else if i == 1 { return point[0] + point[1] }
+    else if i == 2 { return max(point[0], point[1]) + point[2] }
+    if let value = cache[i] { return value }
+    let value = max(stair(i-2), stair(i-3) + point[i-1]) + point[i]
+    cache[i] = value
+    return value
+}
+print(stair(point.count-1))
+
