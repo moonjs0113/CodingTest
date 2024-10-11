@@ -25,3 +25,22 @@ readLine()!.split(separator: " ").map {
         print(sums[range[1]-1] - sums[range[0]-2])
     }
 }
+
+/*
+ 수열
+ https://www.acmicpc.net/problem/2559
+ */
+let i = readLine()!.split(separator: " ").map { Int("\($0)")! }
+var sums: [Int] = []
+var sum = 0
+readLine()!.split(separator: " ").forEach {
+    sum += Int("\($0)")!
+    sums.append(sum)
+}
+(0...(i[0] - i[1])).forEach {
+    if $0 == 0 { sum = sums[i[1] - 1] }
+    else {
+        sum = max(sum, sums[$0 + i[1] - 1] - sums[$0 - 1])
+    }
+}
+print(sum)
