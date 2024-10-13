@@ -14,6 +14,14 @@ arr = [(1, 3), (2, 2), (3, 1)]
 sorted_arr = sorted(arr, key=lambda x: x[1])
 ```
 
+- String
+``` python
+print("string".upper())
+print("STRING".isupper())
+print("STRING".lower())
+print("STRING".islower())
+```
+
 - Math
 ``` python
 import math
