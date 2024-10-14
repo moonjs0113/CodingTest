@@ -1,12 +1,25 @@
+/*
+ DataStructure - DoubleLinkedList
+ Time Complexity
+    - Push: O(1)
+    - Pop: O(1)
+    - Search: O(n)
+ Space Complexity: O(n)
+ */
+
 import Foundation
 
-final class DoubleLinkedList {
+final class DoubleLinkedList<T> {
+    enum Direction {
+        case front
+        case back
+    }
     final class ListNode {
-        let val: Int?
+        let val: T?
         let index: Int
         var front: ListNode?
         var back: ListNode?
-        init(val: Int? = nil, index: Int = 0, front: ListNode? = nil, back: ListNode? = nil) {
+        init(val: T? = nil, index: Int = 0, front: ListNode? = nil, back: ListNode? = nil) {
             self.val = val; self.index = index; self.front = front; self.back = back
         }
     }
@@ -19,12 +32,13 @@ final class DoubleLinkedList {
         self.front?.back = back
     }
     
-    @inline(__always) public func push(isFront: Bool, value: Int) {
-        if isFront {
+    @inline(__always) public func push(to direction: Direction, value: T) {
+        switch direction {
+        case .front:
             let dequeNode = ListNode(val: value, index: count + 1, front: front, back: front?.back)
             front?.back?.front = dequeNode
             front?.back = dequeNode
-        } else {
+        case .back:
             let dequeNode = ListNode(val: value, index: count + 1, front: back?.front, back: back)
             back?.front?.back = dequeNode
             back?.front = dequeNode
@@ -32,13 +46,16 @@ final class DoubleLinkedList {
         count += 1
     }
     
-    @inline(__always) public func pop(isFront: Bool) -> Int? {
+    @inline(__always) public func pop(from direction: Direction) -> T? {
         if count == 0 { return nil }
-        let popNode = isFront ? front?.back : back?.front
-        if isFront {
+        let popNode: ListNode?
+        switch direction {
+        case .front:
+            popNode = front?.back
             front?.back = popNode?.back
             popNode?.back?.front = front
-        } else {
+        case .back:
+            popNode = back?.front
             back?.front = popNode?.front
             popNode?.front?.back = back
         }
@@ -57,8 +74,13 @@ final class DoubleLinkedList {
         count -= 1
     }
     
-    @inline(__always) public func getValue(isFront: Bool) -> Int? {
+    @inline(__always) public func getValue(from direction: Direction) -> T? {
         if count == 0 { return nil }
-        return (isFront ? front?.back?.val : back?.front?.val)
+        switch direction {
+        case .front:
+            return front?.back?.val
+        case .back:
+            return back?.front?.val
+        }
     }
 }

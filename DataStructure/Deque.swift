@@ -1,16 +1,23 @@
 /*
- 백준 단계 별로 풀어보기 16단계
- Deque
+ DataStructure - Deque
+ Time Complexity
+    - Push: O(1)
+    - Pop: O(1)
+ Space Complexity: O(n)
  */
 
 import Foundation
 
-final class Deque {
+final class Deque<T> {
+    enum Direction {
+        case front
+        case back
+    }
     final class DequeNode {
-        let val: Int?
+        let val: T?
         var front: DequeNode?
         var back: DequeNode?
-        init(val: Int? = nil, front: DequeNode? = nil, back: DequeNode? = nil) {
+        init(val: T? = nil, front: DequeNode? = nil, back: DequeNode? = nil) {
             self.val = val; self.front = front; self.back = back
         }
     }
@@ -23,12 +30,13 @@ final class Deque {
         self.front?.back = back
     }
     
-    @inline(__always) public func push(isFront: Bool, value: Int) {
-        if isFront {
+    @inline(__always) public func push(direction: Direction, value: T) {
+        switch direction {
+        case .front:
             let dequeNode = DequeNode(val: value, front: front, back: front?.back)
             front?.back?.front = dequeNode
             front?.back = dequeNode
-        } else {
+        case .back:
             let dequeNode = DequeNode(val: value, front: back?.front, back: back)
             back?.front?.back = dequeNode
             back?.front = dequeNode
@@ -36,13 +44,16 @@ final class Deque {
         count += 1
     }
     
-    @inline(__always) public func pop(isFront: Bool) -> Int? {
+    @inline(__always) public func pop(direction: Direction) -> T? {
         if count == 0 { return nil }
-        var popNode = isFront ? front?.back : back?.front
-        if isFront {
+        var popNode: DequeNode?
+        switch direction {
+        case .front:
+            popNode = front?.back
             front?.back = popNode?.back
             popNode?.back?.front = front
-        } else {
+        case .back:
+            popNode = back?.front
             back?.front = popNode?.front
             popNode?.front?.back = back
         }
@@ -52,8 +63,13 @@ final class Deque {
         return popNode?.val
     }
     
-    @inline(__always) public func getValue(isFront: Bool) -> Int? {
+    @inline(__always) public func getValue(direction: Direction) -> T? {
         if count == 0 { return nil }
-        return (isFront ? front?.back?.val : back?.front?.val)
+        switch direction {
+        case .front:
+            return front?.back?.val
+        case .back:
+            return back?.front?.val
+        }
     }
 }
