@@ -21,3 +21,23 @@ for cost in coins.reversed() {
     if input[1] == 0 { break }
 }
 print(count)
+
+/*
+ 회의실 배정
+ https://www.acmicpc.net/problem/1931
+ */
+var times: [(Int,Int)] = []
+(0..<Int(readLine()!)!).forEach { _ in
+    let time = readLine()!.split(separator: " ").map { Int("\($0)")! }
+    times.append((time.first!, time.last!))
+}
+times.sort {
+    ($0.1) < ($1.1) || ($0.1 == $1.1 && $0.0 < $1.0)
+}
+var s: [(Int,Int)] = [(0,0)]
+for t in times {
+    if s.last!.1 <= t.0 {
+        s.append(t)
+    }
+}
+print(s.count - 1)
