@@ -157,3 +157,20 @@ func stair(_ i: Int) -> Int {
 }
 print(stair(point.count-1))
 
+/*
+ 1로 만들기
+ https://www.acmicpc.net/problem/1463
+ */
+let num = Int(readLine()!)!
+func dp(i: Int) -> Int {
+    var array: [Int] = [0,0,1,1]
+    if i > 3 {
+        (4...i).forEach {
+            array.append(array[$0 - 1] + 1)
+            if $0 % 2 == 0 { array[$0] = min(array[$0], array[$0 / 2] + 1) }
+            if $0 % 3 == 0 { array[$0] = min(array[$0], array[$0 / 3] + 1) }
+        }
+    }
+    return array[i]
+}
+print(dp(i: num))
