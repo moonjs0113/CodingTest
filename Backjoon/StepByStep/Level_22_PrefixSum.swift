@@ -44,3 +44,23 @@ readLine()!.split(separator: " ").forEach {
     }
 }
 print(sum)
+
+/*
+ 인간-컴퓨터 상호작용
+ https://www.acmicpc.net/problem/16139
+ */
+let str = readLine()!
+var sums: [[String: Int]] = []
+str.enumerated().forEach { item in
+    sums.append(item.offset == 0 ? ["\(item.element)":0] : sums[item.offset-1])
+    sums[item.offset]["\(item.element)", default: 0] += 1
+}
+
+(0..<Int(readLine()!)!).forEach { _ in
+    let input = readLine()!.split(separator: " ")
+    let j = Int(input[1])!
+    let k = Int(input[2])!
+    let prev = sums[k]["\(input[0])", default: 0]
+    let r = prev - (j == 0 ? 0 : sums[j-1]["\(input[0])", default: 0])
+    print(r)
+}
