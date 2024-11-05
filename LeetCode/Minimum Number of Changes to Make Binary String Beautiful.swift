@@ -1,9 +1,9 @@
-"""
+/*
   Minimum Number of Changes to Make Binary String Beautiful
   URL: https://leetcode.com/problems/minimum-number-of-changes-to-make-binary-string-beautiful
   Difficulty: Medium
   Topic : String
-"""
+*/
 
 class Solution {
     func minChanges(_ s: String) -> Int {
