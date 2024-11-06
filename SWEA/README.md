@@ -26,6 +26,25 @@ print("string".upper())   # STRING
 print("STRING".isupper()) # True
 print("STRING".lower())   # string
 print("STRING".islower()) # False
+
+let s = "STRING"
+s[::-1] # GNIRTS
+```
+
+- Array
+``` pyton
+[0] * 4 # [0,0,0,0]
+[False] * 2 # [False,False]
+```
+
+- Dictionary
+``` pyton
+dict.keys()
+dict.values()
+dict.get(key, DEFAULT_VALUE)
+sorted(dict.items(), key=lambda item: (item[1], item[0]), reverse=True)
+for key, value in dict.items():
+    print(key, value)
 ```
 
 - Math
@@ -51,7 +70,7 @@ lst = [1, 2, 3]
 result = list(map(str, lst))
 ```
 
--reduce
+- reduce
 ``` python
 from functools import reduce
 reduce(lambda r, x: r + x, range(10),0) # r 반환 값, x 시퀀스 값
