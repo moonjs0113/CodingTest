@@ -1,7 +1,7 @@
-"""
+/*
  카드 문자열
  https://www.acmicpc.net/problem/13417
-"""
+*/
 
 import Foundation
 
