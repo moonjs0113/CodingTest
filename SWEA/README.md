@@ -32,13 +32,13 @@ s[::-1] # GNIRTS
 ```
 
 - Array
-``` pyton
+``` python
 [0] * 4 # [0,0,0,0]
 [False] * 2 # [False,False]
 ```
 
 - Dictionary
-``` pyton
+``` python
 dict.keys()
 dict.values()
 dict.get(key, DEFAULT_VALUE)
