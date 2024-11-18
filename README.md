@@ -64,3 +64,58 @@ stride(from: 0, to: 10, by: 2) // 0, 2, 4, 6, 8
 let cache: [Bool] = Array(repeating: false, count: n + 1)
 let cache: [Int:Int] = [:]
 ```
+
+- Permutation
+``` swift
+func permutations<T>(data: [T], count: Int) -> [[T]]? {
+    guard data.count >= count else { return nil }
+    var result: [[T]] = []
+    var buffer: [T] = []
+    var visited = Array(repeating: false, count: data.count)
+    
+    func nextElement() {
+        if buffer.count == count {
+            result.append(buffer)
+            return
+        }
+        for i in 0..<data.count {
+            if !visited[i] {
+                visited[i] = true
+                buffer.append(data[i])
+                nextElement()
+                buffer.removeLast()
+                visited[i] = false
+            }
+        }
+    }
+    nextElement()
+    return result
+}
+```
+
+- Combination
+``` swift
+func combinations<T>(data: [T], count: Int) -> [[T]]? {
+    guard data.count >= count else { return nil }
+    var result: [[T]] = []
+    var buffer: [T] = []
+    
+    func nextElement(index: Int) {
+        print(buffer)
+        if buffer.count == count {
+            result.append(buffer)
+            return
+        }
+        if index >= data.count { return }
+        buffer.append(data[index])
+        nextElement(index: index + 1)
+        buffer.removeLast()
+        nextElement(index: index + 1)
+    }
+    nextElement(index: 0)
+    return result
+}
+```
+
+
+
