@@ -64,3 +64,21 @@ str.enumerated().forEach { item in
     let r = prev - (j == 0 ? 0 : sums[j-1]["\(input[0])", default: 0])
     print(r)
 }
+
+/*
+ 나머지 합
+ https://www.acmicpc.net/problem/10986
+ */
+let input = readLine()!.split(separator: " ").map { Int("\($0)")! }
+var count = Array(repeating: 0, count: input[1])
+var sum = 0
+var result = 0
+readLine()!.split(separator: " ").forEach {
+    sum = (sum + Int("\($0)")!) % input[1]
+    if sum == 0 {
+        result += 1
+    }
+    result += count[sum]
+    count[sum] += 1
+}
+print(result)
