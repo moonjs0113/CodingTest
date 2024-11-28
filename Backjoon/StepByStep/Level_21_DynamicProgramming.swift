@@ -174,3 +174,22 @@ func dp(i: Int) -> Int {
     return array[i]
 }
 print(dp(i: num))
+
+/*
+ 쉬운 계단 수
+ https://www.acmicpc.net/problem/10844
+ */
+let n = Int(readLine()!)!
+var nums: [Int: Int] = [0:0, 1:1, 2:1, 3:1, 4:1, 5:1, 6:1, 7:1, 8:1, 9:1]
+(1..<n).forEach { _ in
+    var tempNums: [Int: Int] = [:]
+    (0...9).forEach { k in
+        if nums[k]! > 0 {
+            let count = nums[k]!
+            tempNums[k-1] = (tempNums[k-1] ?? 0) + (nums[k]! % 1_000_000_000)
+            tempNums[k+1] = (tempNums[k+1] ?? 0) + (nums[k]! % 1_000_000_000)
+        }
+    }
+    nums = tempNums
+}
+print((0...9).reduce(0) { $0 + nums[$1]! } % 1_000_000_000)
