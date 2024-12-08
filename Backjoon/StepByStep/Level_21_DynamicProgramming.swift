@@ -193,3 +193,24 @@ var nums: [Int: Int] = [0:0, 1:1, 2:1, 3:1, 4:1, 5:1, 6:1, 7:1, 8:1, 9:1]
     nums = tempNums
 }
 print((0...9).reduce(0) { $0 + nums[$1]! } % 1_000_000_000)
+
+/*
+ 포도주 시식
+ https://www.acmicpc.net/problem/2156
+ */
+let n = Int(readLine()!)!
+let wine = (0..<n).map { _ in Int(readLine()!)! }
+var dp = [wine[0]]
+if n == 1 { print(dp[0]) }
+else {
+    dp.append(wine[0] + wine[1])
+    if n == 2 { print(dp[1]) }
+    else {
+        dp.append(max(wine[0] + wine[1], wine[0] + wine[2], wine[1] + wine[2]))
+        for i in 3..<n {
+            dp.append(max(dp[i-1], dp[i-2] + wine[i], dp[i-3] + wine[i] + wine[i-1]))
+        }
+        print(dp[n-1])
+    }
+}
+
