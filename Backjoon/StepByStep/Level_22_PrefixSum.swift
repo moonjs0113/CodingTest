@@ -82,3 +82,28 @@ readLine()!.split(separator: " ").forEach {
     count[sum] += 1
 }
 print(result)
+
+/*
+ 구간 합 구하기 5
+ https://www.acmicpc.net/problem/11660
+ */
+let input = readLine()!.split(separator: " ")
+var matrix: [[Int]] = []
+(0..<Int("\(input[0])")!).forEach { _ in
+    let sums = readLine()!.split(separator: " ").enumerated().reduce(into: [Int]()) {
+        var sum = ($0.last ?? 0) + Int("\($1.element)")! + (matrix.last?[$1.offset] ?? 0)
+        if $1.offset > 0 {
+            sum -= (matrix.last?[$1.offset-1] ?? 0)
+        }
+        $0.append(sum)
+    }
+    matrix.append(sums)
+}
+(0..<Int("\(input[1])")!).forEach { _ in
+    let p = readLine()!.split(separator: " ").map { Int("\($0)")! }
+    var result = matrix[p[2]-1][p[3]-1]
+    result -= (p[0] != 1 ? matrix[p[0]-2][p[3]-1] : 0)
+    result -= (p[1] != 1 ? matrix[p[2]-1][p[1]-2] : 0)
+    result += (p[1] != 1 && p[0] != 1 ? matrix[p[0]-2][p[1]-2] : 0)
+    print(result)
+}
