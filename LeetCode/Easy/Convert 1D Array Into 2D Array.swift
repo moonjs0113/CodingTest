@@ -1,7 +1,7 @@
 /*
   Convert 1D Array Into 2D Array
   URL: https://leetcode.com/problems/convert-1d-array-into-2d-array
-  Difficulty: Medium
+  Difficulty: Easy
   Topic : Array, Matrix, Simulation
 */
 
